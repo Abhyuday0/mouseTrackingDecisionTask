@@ -1,85 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>VWP Mouse Tracking Experiment</title>
+    <title>Visual World Paradigm Experiment</title>
 
+    <script src="https://unpkg.com/jspsych@8.2.3"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/plugin-call-function@2.1.0"></script>
+    <script src="https://unpkg.com/@jspsych/extension-mouse-tracking@1.1.0"></script>
+    <link href="https://unpkg.com/jspsych@8.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
 
-  <script src="https://unpkg.com/jspsych@8.2.3"></script>
-  <link href="https://unpkg.com/jspsych@8.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+    <style>
+        /* ── General reset ───────────────────────────────────────────────── */
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: white;
+        }
 
-  <!-- ── jsPsych plugins ─────────────────────────────────────────────────── -->
-  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
-  <script src="https://unpkg.com/@jspsych/plugin-call-function@2.1.0"></script>
+        /* ── VWP trial layout ────────────────────────────────────────────── */
+        .vwp-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background-color: white;
+        }
 
-  <style>
-    /* ── Reset & base ──────────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        .vwp-image {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+            cursor: pointer;
+            border: 3px solid transparent;
+            transition: border-color 0.2s;
+            /* centre the image on its anchor point */
+            transform: translate(-50%, -50%);
+        }
 
-    body {
-      background: #f5f0e8;
-      font-family: Georgia, 'Times New Roman', serif;
-      color: #222;
-      /* Prevent text selection during dragging */
-      user-select: none;
-      -webkit-user-select: none;
-    }
+        .vwp-image:hover {
+            border-color: #aaa;
+        }
 
-    /* Override jsPsych centering for our full-screen trial plugin */
-    #jspsych-content {
-      max-width: 100% !important;
-      padding: 0 !important;
-    }
+        /* Upper-left and upper-right corners */
+        .position-top-left {
+            left: 20%;
+            top: 25%;
+        }
 
-    /* ── jsPsych instruction screens ───────────────────────────────────────── */
-    .jspsych-content {
-      max-width: 700px;
-    }
+        .position-top-right {
+            left: 80%;
+            top: 25%;
+        }
 
-    .jspsych-btn {
-      font-family: Georgia, serif;
-      font-size: 16px;
-      padding: 10px 28px;
-      background: #3a5a8c;
-      color: white;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      letter-spacing: 0.5px;
-      transition: background 0.2s;
-    }
-    .jspsych-btn:hover { background: #2d4870; }
+        /* ── Start button ────────────────────────────────────────────────── */
+        /*
+         * jsPsych renders the button inside .jspsych-html-button-response-btngroup.
+         * We override that container so the button sits at bottom-centre,
+         * matching the Spivey et al. (2005) starting position.
+         */
+        .jspsych-html-button-response-btngroup {
+            position: fixed !important;
+            bottom: 99vh !important;
+            left: 50% !important;
+            transform: translateX(-50%) !important;
+            display: flex;
+            justify-content: center;
+        }
+        
 
-    /* ── Loading bar ───────────────────────────────────────────────────────── */
-    #jspsych-progressbar-container {
-      background: #ddd;
-      border-radius: 3px;
-      height: 8px;
-      width: 100%;
-      max-width: 400px;
-      margin: 16px auto;
-    }
-    #jspsych-progressbar-inner {
-      background: #3a5a8c;
-      height: 100%;
-      border-radius: 3px;
-      transition: width 0.3s;
-    }
+        .start-btn,
+        .jspsych-html-button-response-button button {
+            font-size: 18px;
+            padding: 14px 40px;
+            border-radius: 8px;
+            border: 2px solid #555;
+            background-color: #f5f5f5;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
 
-    /* ── Prevent right-click context menu during experiment ────────────────── */
-  </style>
+        .start-btn:hover,
+        .jspsych-html-button-response-button button:hover {
+            background-color: #ddd;
+        }
+
+        /* Hide the default jsPsych content wrapper margin during button screen */
+        .jspsych-content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+
+    <script src="experiment.js" defer></script>
 </head>
-
-<body>
-  <!-- Prevent right-click during the experiment -->
-  <script>
-    document.addEventListener("contextmenu", e => e.preventDefault());
-  </script>
-
-  <!-- ── Your experiment script ───────────────────────────────────────────── -->
-  <script src="experiment.js"></script>
-</body>
+<body></body>
 </html>
