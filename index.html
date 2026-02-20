@@ -1,52 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Visual World Paradigm Experiment</title>
-    <script src="https://unpkg.com/jspsych@8.2.2"></script>
-    <script src="https://unpkg.com/regenerator-runtime/runtime.js"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.0.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-audio-keyboard-response@2.0.0"></script>
-    <script src="https://unpkg.com/@jspsych/extension-example@1.0.0"></script>
-    <script src="https://unpkg.com/@jspsych/plugin-initialize-camera@2.1.0"></script>
-    <script src="https://unpkg.com/@jspsych/extension-record-video@1.0.0"></script>
-    <link href="https://unpkg.com/jspsych@8.2.2/css/jspsych.css" rel="stylesheet" type="text/css" />
-    <style>
-        .vwp-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-            background-color: white;
-        }
-        .vwp-image {
-            position: absolute;
-            width: 400px;
-            height: 400px;
-            object-fit: contain;
-            cursor: pointer;
-            border: 3px solid transparent;
-            transition: border-color 0.2s;
-        }
-        /* .vwp-image:hover {
-            border-color: #4CAF50;
-        }
-        .vwp-image.clicked {
-            border-color: #2196F3;
-        } */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VWP Mouse Tracking Experiment</title>
 
-        /* Diagonal positioning - images centered at specified coordinates */
-        .position-top-left {
-            left: 25%;
-            top: 25%;
-            transform: translate(-50%, -50%);
-        }
-        .position-bottom-right {
-            left: 75%;
-            top: 75%;
-            transform: translate(-50%, -50%);
-        }
-    </style>
-    <script src="experiment.js" defer></script>
+
+  <script src="https://unpkg.com/jspsych@8.2.3"></script>
+  <link href="https://unpkg.com/jspsych@8.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
+
+  <!-- ── jsPsych plugins ─────────────────────────────────────────────────── -->
+  <script src="https://unpkg.com/@jspsych/plugin-html-button-response@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-preload@2.1.0"></script>
+  <script src="https://unpkg.com/@jspsych/plugin-call-function@2.1.0"></script>
+
+  <style>
+    /* ── Reset & base ──────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #f5f0e8;
+      font-family: Georgia, 'Times New Roman', serif;
+      color: #222;
+      /* Prevent text selection during dragging */
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Override jsPsych centering for our full-screen trial plugin */
+    #jspsych-content {
+      max-width: 100% !important;
+      padding: 0 !important;
+    }
+
+    /* ── jsPsych instruction screens ───────────────────────────────────────── */
+    .jspsych-content {
+      max-width: 700px;
+    }
+
+    .jspsych-btn {
+      font-family: Georgia, serif;
+      font-size: 16px;
+      padding: 10px 28px;
+      background: #3a5a8c;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      letter-spacing: 0.5px;
+      transition: background 0.2s;
+    }
+    .jspsych-btn:hover { background: #2d4870; }
+
+    /* ── Loading bar ───────────────────────────────────────────────────────── */
+    #jspsych-progressbar-container {
+      background: #ddd;
+      border-radius: 3px;
+      height: 8px;
+      width: 100%;
+      max-width: 400px;
+      margin: 16px auto;
+    }
+    #jspsych-progressbar-inner {
+      background: #3a5a8c;
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.3s;
+    }
+
+    /* ── Prevent right-click context menu during experiment ────────────────── */
+  </style>
 </head>
-<body></body>
+
+<body>
+  <!-- Prevent right-click during the experiment -->
+  <script>
+    document.addEventListener("contextmenu", e => e.preventDefault());
+  </script>
+
+  <!-- ── Your experiment script ───────────────────────────────────────────── -->
+  <script src="experiment.js"></script>
+</body>
 </html>
