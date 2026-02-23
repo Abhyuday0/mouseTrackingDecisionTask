@@ -1,4 +1,8 @@
 cohort_list,target_location,target,cohort,replace_cohort,audio
+0,R,ball.png,bell.png,,ball.wav
+0,L,pizza.png,frog.png,,pizza.wav
+0,R,jar.png,pizza.png,,jar.wav
+0,L,bell.png,ball.png,,bell.wav
 1,R,bed.png,belt.png,cymbals.png,bed.wav
 1,L,letter.png,lettuce.png,clown.png,letter.wav
 1,R,banana.png,balloon.png,mitten.png,banana.wav

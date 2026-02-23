@@ -11,29 +11,58 @@ let jsPsych = initJsPsych({
 let timeline = [];
 
 // Experiment parameters
-const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
+// const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
 const audio_delay = 500;       // ms after image onset before audio plays (per Spivey et al.)
 
 // Parse CSV data into trial structure
+
+
 const stimuli = [
-    {list: 1, target_location: "R", target: "bed.png", cohort: "belt.png", replace: "cymbals.png", audio: "bed.wav"},
-    {list: 1, target_location: "L", target: "letter.png", cohort: "lettuce.png", replace: "clown.png", audio: "letter.wav"},
-    {list: 1, target_location: "R", target: "banana.png", cohort: "balloon.png", replace: "mitten.png", audio: "banana.wav"}
-    // {list: 1, target_location: "L", target: "car.png", cohort: "cards.png", replace: "belt.png", audio: "car.wav"},
-    // {list: 1, target_location: "R", target: "mother.png", cohort: "money.png", replace: "cards.png", audio: "mother.wav"},
-    // {list: 1, target_location: "L", target: "cloud.png", cohort: "clown.png", replace: "robe.png", audio: "cloud.wav"},
-    // {list: 1, target_location: "R", target: "milk.png", cohort: "mitten.png", replace: "windmill.png", audio: "milk.wav"},
-    // {list: 1, target_location: "L", target: "leash.png", cohort: "leaf.png", replace: "flag.png", audio: "leash.wav"},
-    // {list: 1, target_location: "R", target: "chair.png", cohort: "cherry.png", replace: "money.png", audio: "chair.wav"},
-    // {list: 1, target_location: "L", target: "flashlight.png", cohort: "flag.png", replace: "balloon.png", audio: "flashlight.wav"},
-    // {list: 1, target_location: "R", target: "picture.png", cohort: "pickle.png", replace: "notebook.png", audio: "picture.wav"},
-    // {list: 1, target_location: "L", target: "window.png", cohort: "windmill.png", replace: "pickle.png", audio: "window.wav"},
-    // {list: 1, target_location: "R", target: "paper.png", cohort: "pail.png", replace: "lettuce.png", audio: "paper.wav"},
-    // {list: 1, target_location: "L", target: "scissors.png", cohort: "cymbals.png", replace: "cherry.png", audio: "scissors.wav"},
-    // {list: 1, target_location: "R", target: "nose.png", cohort: "notebook.png", replace: "pail.png", audio: "nose.wav"},
-    // {list: 1, target_location: "L", target: "rope.png", cohort: "robe.png", replace: "leaf.png", audio: "rope.wav"},
-    // {list: 1, target_location: "R", target: "brick.png", cohort: "bridge.png", replace: "pencil.png", audio: "brick.wav"},
-    // {list: 1, target_location: "L", target: "penguin.png", cohort: "pencil.png", replace: "bridge.png", audio: "penguin.wav"},
+    // ── List 0 (Practice List)─────────────────────────
+    {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.wav"},
+    {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.wav"},
+    // {list: 0, target_location: "R", target: "jar.png",      cohort: "pizza.png",     replace: "",               audio: "jar.wav"},
+    // {list: 0, target_location: "L", target: "bell.png",     cohort: "ball.png",      replace: "",               audio: "bell.wav"},
+
+    // ── List 1 ─────────────────────────────────────────
+    {list: 1, target_location: "R", target: "bed.png",        cohort: "belt.png",       replace: "cymbals.png",    audio: "bed.wav"},
+    {list: 1, target_location: "L", target: "letter.png",     cohort: "lettuce.png",    replace: "clown.png",      audio: "letter.wav"},
+    // {list: 1, target_location: "R", target: "banana.png",     cohort: "balloon.png",    replace: "mitten.png",     audio: "banana.wav"},
+    // {list: 1, target_location: "L", target: "car.png",        cohort: "cards.png",      replace: "belt.png",       audio: "car.wav"},
+    // {list: 1, target_location: "R", target: "mother.png",     cohort: "money.png",      replace: "cards.png",      audio: "mother.wav"},
+    // {list: 1, target_location: "L", target: "cloud.png",      cohort: "clown.png",      replace: "robe.png",       audio: "cloud.wav"},
+    // {list: 1, target_location: "R", target: "milk.png",       cohort: "mitten.png",     replace: "windmill.png",   audio: "milk.wav"},
+    // {list: 1, target_location: "L", target: "leash.png",      cohort: "leaf.png",       replace: "flag.png",       audio: "leash.wav"},
+    // {list: 1, target_location: "R", target: "chair.png",      cohort: "cherry.png",     replace: "money.png",      audio: "chair.wav"},
+    // {list: 1, target_location: "L", target: "flashlight.png", cohort: "flag.png",       replace: "balloon.png",    audio: "flashlight.wav"},
+    // {list: 1, target_location: "R", target: "picture.png",    cohort: "pickle.png",     replace: "notebook.png",   audio: "picture.wav"},
+    // {list: 1, target_location: "L", target: "window.png",     cohort: "windmill.png",   replace: "pickle.png",     audio: "window.wav"},
+    // {list: 1, target_location: "R", target: "paper.png",      cohort: "pail.png",       replace: "lettuce.png",    audio: "paper.wav"},
+    // {list: 1, target_location: "L", target: "scissors.png",   cohort: "cymbals.png",    replace: "cherry.png",     audio: "scissors.wav"},
+    // {list: 1, target_location: "R", target: "nose.png",       cohort: "notebook.png",   replace: "pail.png",       audio: "nose.wav"},
+    // {list: 1, target_location: "L", target: "rope.png",       cohort: "robe.png",       replace: "leaf.png",       audio: "rope.wav"},
+    // {list: 1, target_location: "R", target: "brick.png",      cohort: "bridge.png",     replace: "pencil.png",     audio: "brick.wav"},
+    // {list: 1, target_location: "L", target: "penguin.png",    cohort: "pencil.png",     replace: "bridge.png",     audio: "penguin.wav"},
+
+    // // ── List 2 ─────────────────────────────────────────
+    {list: 2, target_location: "R", target: "pumpkin.png",    cohort: "puzzle.png",     replace: "table.png",      audio: "pumpkin.wav"},
+    {list: 2, target_location: "L", target: "mouse.png",      cohort: "mouth.png",      replace: "backpack.png",   audio: "mouse.wav"},
+    // {list: 2, target_location: "R", target: "doctor.png",     cohort: "doll.png",       replace: "pea.png",        audio: "doctor.wav"},
+    // {list: 2, target_location: "L", target: "battery.png",    cohort: "backpack.png",   replace: "puppet.png",     audio: "battery.wav"},
+    // {list: 2, target_location: "R", target: "street.png",     cohort: "stream.png",     replace: "toad.png",       audio: "street.wav"},
+    // {list: 2, target_location: "L", target: "children.png",   cohort: "chicken.png",    replace: "doll.png",       audio: "children.wav"},
+    // {list: 2, target_location: "R", target: "toast.png",      cohort: "toad.png",       replace: "skunk.png",      audio: "toast.wav"},
+    // {list: 2, target_location: "L", target: "chalk.png",      cohort: "chocolate.png",  replace: "telephone2.png", audio: "chalk.wav"},
+    // {list: 2, target_location: "R", target: "baby.png",       cohort: "bacon.png",      replace: "planet.png",     audio: "baby.wav"},
+    // {list: 2, target_location: "L", target: "hammer.png",     cohort: "hammock.png",    replace: "bacon.png",      audio: "hammer.wav"},
+    // {list: 2, target_location: "R", target: "telescope.png",  cohort: "telephone2.png", replace: "spider.png",     audio: "telescope.wav"},
+    // {list: 2, target_location: "L", target: "eye.png",        cohort: "ice.png",        replace: "chocolate.png",  audio: "eye.wav"},
+    // {list: 2, target_location: "R", target: "peel.png",       cohort: "pea.png",        replace: "hammock.png",    audio: "peel.wav"},
+    // {list: 2, target_location: "L", target: "puddle.png",     cohort: "puppet.png",     replace: "ice.png",        audio: "puddle.wav"},
+    // {list: 2, target_location: "R", target: "tape.png",       cohort: "table.png",      replace: "puzzle.png",     audio: "tape.wav"},
+    // {list: 2, target_location: "L", target: "skirt.png",      cohort: "skunk.png",      replace: "chicken.png",    audio: "skirt.wav"},
+    // {list: 2, target_location: "R", target: "spoon.png",      cohort: "spider.png",     replace: "mouth.png",      audio: "spoon.wav"},
+    // {list: 2, target_location: "L", target: "plate.png",      cohort: "planet.png",     replace: "stream.png",     audio: "plate.wav"}
 ];
 
 // Welcome page
@@ -78,12 +107,13 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
 
     // ── Step 1: Start button (bottom centre) ──────────────────────────────────
     // Participant clicks this to begin the trial from a known starting position.
+
     const start_button = {
         type: jsPsychHtmlButtonResponse,
-        stimulus: `<p style="color:#666; margin-bottom: 120px;">Click the button below when you are ready.</p>`,
+        stimulus: `<p style="color:#666; position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);">Click the button below when you are ready.</p>`,
         choices: ['Start'],
         button_html: function(choice) {
-            return `<button class="jspsych-btn start-btn">${choice}</button>`;
+            return `<button class="jspsych-btn start-btn" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">${choice}</button>`;
         }
     };
     
@@ -153,8 +183,8 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
     return [start_button, trial];
 }
 
-// ── Practice trials ────────────────────────────────────────────────────────────
-const practice_stimuli = stimuli.slice(0, 3);
+// ── Practice trials (list 0) ───────────────────────────────────────────────────
+const practice_stimuli = stimuli.filter(s => s.list === 0);
 practice_stimuli.forEach(stim => {
     const practice_trials = createVWPTrial(stim, 'cohort', true);
     timeline.push(...practice_trials);
@@ -173,8 +203,8 @@ let practice_end = {
 };
 timeline.push(practice_end);
 
-// ── Experimental trials ────────────────────────────────────────────────────────
-const experimental_stimuli = stimuli.slice(3);
+// ── Experimental trials (list > 0) ────────────────────────────────────────────
+const experimental_stimuli = stimuli.filter(s => s.list > 0);
 
 experimental_stimuli.forEach((stim, index) => {
     const condition = index % 2 === 0 ? 'cohort' : 'control';
