@@ -19,19 +19,19 @@ const audio_delay = 500;       // ms after image onset before audio plays (per S
 
 const stimuli = [
     // ── List 0 (Practice List)─────────────────────────
-    {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.mp3"},
-    {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.mp3"},
+    // {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.mp3"},
+    // {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.mp3"},
     // {list: 0, target_location: "R", target: "jar.png",      cohort: "pizza.png",     replace: "",               audio: "jar.mp3"},
     // {list: 0, target_location: "L", target: "bell.png",     cohort: "ball.png",      replace: "",               audio: "bell.mp3"},
 
     // ── List 1 ─────────────────────────────────────────
     {list: 1, target_location: "R", target: "bed.png",        cohort: "belt.png",       replace: "cymbals.png",    audio: "bed.mp3"},
     {list: 1, target_location: "L", target: "letter.png",     cohort: "lettuce.png",    replace: "clown.png",      audio: "letter.mp3"},
-    // {list: 1, target_location: "R", target: "banana.png",     cohort: "balloon.png",    replace: "mitten.png",     audio: "banana.mp3"},
-    // {list: 1, target_location: "L", target: "car.png",        cohort: "cards.png",      replace: "belt.png",       audio: "car.mp3"},
-    // {list: 1, target_location: "R", target: "mother.png",     cohort: "money.png",      replace: "cards.png",      audio: "mother.mp3"},
-    // {list: 1, target_location: "L", target: "cloud.png",      cohort: "clown.png",      replace: "robe.png",       audio: "cloud.mp3"},
-    // {list: 1, target_location: "R", target: "milk.png",       cohort: "mitten.png",     replace: "windmill.png",   audio: "milk.mp3"},
+    {list: 1, target_location: "R", target: "banana.png",     cohort: "balloon.png",    replace: "mitten.png",     audio: "banana.mp3"},
+    {list: 1, target_location: "L", target: "car.png",        cohort: "cards.png",      replace: "belt.png",       audio: "car.mp3"},
+    {list: 1, target_location: "R", target: "mother.png",     cohort: "money.png",      replace: "cards.png",      audio: "mother.mp3"},
+    {list: 1, target_location: "L", target: "cloud.png",      cohort: "clown.png",      replace: "robe.png",       audio: "cloud.mp3"},
+    {list: 1, target_location: "R", target: "milk.png",       cohort: "mitten.png",     replace: "windmill.png",   audio: "milk.mp3"},
     // {list: 1, target_location: "L", target: "leash.png",      cohort: "leaf.png",       replace: "flag.png",       audio: "leash.mp3"},
     // {list: 1, target_location: "R", target: "chair.png",      cohort: "cherry.png",     replace: "money.png",      audio: "chair.mp3"},
     // {list: 1, target_location: "L", target: "flashlight.png", cohort: "flag.png",       replace: "balloon.png",    audio: "flashlight.mp3"},
@@ -196,19 +196,34 @@ let practice_end = {
 timeline.push(practice_end);
 
 // ── Experimental trials (list > 0) ────────────────────────────────────────────
+// Each stimulus generates two trial pairs: one cohort, one control.
+// The pairs are shuffled randomly, then added to the timeline with optional breaks.
 const experimental_stimuli = stimuli.filter(s => s.list > 0);
 
-experimental_stimuli.forEach((stim, index) => {
-    const condition = index % 2 === 0 ? 'cohort' : 'control';
+// Build all trial pairs (each pair = [start_button, main_trial])
+let experimental_trial_pairs = [];
+experimental_stimuli.forEach(stim => {
+    experimental_trial_pairs.push({ stim, condition: 'cohort' });
+    experimental_trial_pairs.push({ stim, condition: 'control' });
+});
+
+// // Fisher-Yates shuffle
+// for (let i = experimental_trial_pairs.length - 1; i > 0; i--) {
+//     const j = Math.floor(Math.random() * (i + 1));
+//     [experimental_trial_pairs[i], experimental_trial_pairs[j]] = [experimental_trial_pairs[j], experimental_trial_pairs[i]];
+// }
+experimental_trial_pairs = jsPsych.randomization.shuffle(experimental_trial_pairs);
+
+experimental_trial_pairs.forEach(({ stim, condition }, index) => {
     const trials = createVWPTrial(stim, condition, false);
     timeline.push(...trials);
 
-    if ((index + 1) % 15 === 0 && index < experimental_stimuli.length - 1) {
+    if ((index + 1) % 15 === 0 && index < experimental_trial_pairs.length - 1) {
         timeline.push({
             type: jsPsychHtmlKeyboardResponse,
             stimulus: `
                 <h2>Take a break!</h2>
-                <p>You've completed ${index + 1} out of ${experimental_stimuli.length} trials.</p>
+                <p>You've completed ${index + 1} out of ${experimental_trial_pairs.length} trials.</p>
                 <p><i>Press SPACE when you're ready to continue</i></p>
             `,
             choices: [' ']
