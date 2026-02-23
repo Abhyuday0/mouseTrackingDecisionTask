@@ -19,19 +19,19 @@ const audio_delay = 500;       // ms after image onset before audio plays (per S
 
 const stimuli = [
     // ── List 0 (Practice List)─────────────────────────
-    // {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.mp3"},
-    // {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.mp3"},
+    {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.mp3"},
+    {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.mp3"},
     // {list: 0, target_location: "R", target: "jar.png",      cohort: "pizza.png",     replace: "",               audio: "jar.mp3"},
     // {list: 0, target_location: "L", target: "bell.png",     cohort: "ball.png",      replace: "",               audio: "bell.mp3"},
 
     // ── List 1 ─────────────────────────────────────────
     {list: 1, target_location: "R", target: "bed.png",        cohort: "belt.png",       replace: "cymbals.png",    audio: "bed.mp3"},
     {list: 1, target_location: "L", target: "letter.png",     cohort: "lettuce.png",    replace: "clown.png",      audio: "letter.mp3"},
-    {list: 1, target_location: "R", target: "banana.png",     cohort: "balloon.png",    replace: "mitten.png",     audio: "banana.mp3"},
-    {list: 1, target_location: "L", target: "car.png",        cohort: "cards.png",      replace: "belt.png",       audio: "car.mp3"},
-    {list: 1, target_location: "R", target: "mother.png",     cohort: "money.png",      replace: "cards.png",      audio: "mother.mp3"},
-    {list: 1, target_location: "L", target: "cloud.png",      cohort: "clown.png",      replace: "robe.png",       audio: "cloud.mp3"},
-    {list: 1, target_location: "R", target: "milk.png",       cohort: "mitten.png",     replace: "windmill.png",   audio: "milk.mp3"},
+    // {list: 1, target_location: "R", target: "banana.png",     cohort: "balloon.png",    replace: "mitten.png",     audio: "banana.mp3"},
+    // {list: 1, target_location: "L", target: "car.png",        cohort: "cards.png",      replace: "belt.png",       audio: "car.mp3"},
+    // {list: 1, target_location: "R", target: "mother.png",     cohort: "money.png",      replace: "cards.png",      audio: "mother.mp3"},
+    // {list: 1, target_location: "L", target: "cloud.png",      cohort: "clown.png",      replace: "robe.png",       audio: "cloud.mp3"},
+    // {list: 1, target_location: "R", target: "milk.png",       cohort: "mitten.png",     replace: "windmill.png",   audio: "milk.mp3"},
     // {list: 1, target_location: "L", target: "leash.png",      cohort: "leaf.png",       replace: "flag.png",       audio: "leash.mp3"},
     // {list: 1, target_location: "R", target: "chair.png",      cohort: "cherry.png",     replace: "money.png",      audio: "chair.mp3"},
     // {list: 1, target_location: "L", target: "flashlight.png", cohort: "flag.png",       replace: "balloon.png",    audio: "flashlight.mp3"},
@@ -110,8 +110,7 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
 
     const start_button = {
         type: jsPsychHtmlButtonResponse,
-        stimulus: `<p style="color:#666; position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);">Click the button below when you are ready.</p>`,
-        choices: ['Start'],
+        stimulus: is_practice ? `<p style="color:#666; position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);">Click the button below when you are ready.</p>` : '',        choices: ['⬆'],
         button_html: function(choice) {
             return `<button class="jspsych-btn start-btn" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">${choice}</button>`;
         }
