@@ -19,50 +19,50 @@ const audio_delay = 500;       // ms after image onset before audio plays (per S
 
 const stimuli = [
     // ── List 0 (Practice List)─────────────────────────
-    {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.wav"},
-    {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.wav"},
-    // {list: 0, target_location: "R", target: "jar.png",      cohort: "pizza.png",     replace: "",               audio: "jar.wav"},
-    // {list: 0, target_location: "L", target: "bell.png",     cohort: "ball.png",      replace: "",               audio: "bell.wav"},
+    {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.mp3"},
+    {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.mp3"},
+    // {list: 0, target_location: "R", target: "jar.png",      cohort: "pizza.png",     replace: "",               audio: "jar.mp3"},
+    // {list: 0, target_location: "L", target: "bell.png",     cohort: "ball.png",      replace: "",               audio: "bell.mp3"},
 
     // ── List 1 ─────────────────────────────────────────
-    {list: 1, target_location: "R", target: "bed.png",        cohort: "belt.png",       replace: "cymbals.png",    audio: "bed.wav"},
-    {list: 1, target_location: "L", target: "letter.png",     cohort: "lettuce.png",    replace: "clown.png",      audio: "letter.wav"},
-    // {list: 1, target_location: "R", target: "banana.png",     cohort: "balloon.png",    replace: "mitten.png",     audio: "banana.wav"},
-    // {list: 1, target_location: "L", target: "car.png",        cohort: "cards.png",      replace: "belt.png",       audio: "car.wav"},
-    // {list: 1, target_location: "R", target: "mother.png",     cohort: "money.png",      replace: "cards.png",      audio: "mother.wav"},
-    // {list: 1, target_location: "L", target: "cloud.png",      cohort: "clown.png",      replace: "robe.png",       audio: "cloud.wav"},
-    // {list: 1, target_location: "R", target: "milk.png",       cohort: "mitten.png",     replace: "windmill.png",   audio: "milk.wav"},
-    // {list: 1, target_location: "L", target: "leash.png",      cohort: "leaf.png",       replace: "flag.png",       audio: "leash.wav"},
-    // {list: 1, target_location: "R", target: "chair.png",      cohort: "cherry.png",     replace: "money.png",      audio: "chair.wav"},
-    // {list: 1, target_location: "L", target: "flashlight.png", cohort: "flag.png",       replace: "balloon.png",    audio: "flashlight.wav"},
-    // {list: 1, target_location: "R", target: "picture.png",    cohort: "pickle.png",     replace: "notebook.png",   audio: "picture.wav"},
-    // {list: 1, target_location: "L", target: "window.png",     cohort: "windmill.png",   replace: "pickle.png",     audio: "window.wav"},
-    // {list: 1, target_location: "R", target: "paper.png",      cohort: "pail.png",       replace: "lettuce.png",    audio: "paper.wav"},
-    // {list: 1, target_location: "L", target: "scissors.png",   cohort: "cymbals.png",    replace: "cherry.png",     audio: "scissors.wav"},
-    // {list: 1, target_location: "R", target: "nose.png",       cohort: "notebook.png",   replace: "pail.png",       audio: "nose.wav"},
-    // {list: 1, target_location: "L", target: "rope.png",       cohort: "robe.png",       replace: "leaf.png",       audio: "rope.wav"},
-    // {list: 1, target_location: "R", target: "brick.png",      cohort: "bridge.png",     replace: "pencil.png",     audio: "brick.wav"},
-    // {list: 1, target_location: "L", target: "penguin.png",    cohort: "pencil.png",     replace: "bridge.png",     audio: "penguin.wav"},
+    {list: 1, target_location: "R", target: "bed.png",        cohort: "belt.png",       replace: "cymbals.png",    audio: "bed.mp3"},
+    {list: 1, target_location: "L", target: "letter.png",     cohort: "lettuce.png",    replace: "clown.png",      audio: "letter.mp3"},
+    // {list: 1, target_location: "R", target: "banana.png",     cohort: "balloon.png",    replace: "mitten.png",     audio: "banana.mp3"},
+    // {list: 1, target_location: "L", target: "car.png",        cohort: "cards.png",      replace: "belt.png",       audio: "car.mp3"},
+    // {list: 1, target_location: "R", target: "mother.png",     cohort: "money.png",      replace: "cards.png",      audio: "mother.mp3"},
+    // {list: 1, target_location: "L", target: "cloud.png",      cohort: "clown.png",      replace: "robe.png",       audio: "cloud.mp3"},
+    // {list: 1, target_location: "R", target: "milk.png",       cohort: "mitten.png",     replace: "windmill.png",   audio: "milk.mp3"},
+    // {list: 1, target_location: "L", target: "leash.png",      cohort: "leaf.png",       replace: "flag.png",       audio: "leash.mp3"},
+    // {list: 1, target_location: "R", target: "chair.png",      cohort: "cherry.png",     replace: "money.png",      audio: "chair.mp3"},
+    // {list: 1, target_location: "L", target: "flashlight.png", cohort: "flag.png",       replace: "balloon.png",    audio: "flashlight.mp3"},
+    // {list: 1, target_location: "R", target: "picture.png",    cohort: "pickle.png",     replace: "notebook.png",   audio: "picture.mp3"},
+    // {list: 1, target_location: "L", target: "window.png",     cohort: "windmill.png",   replace: "pickle.png",     audio: "window.mp3"},
+    // {list: 1, target_location: "R", target: "paper.png",      cohort: "pail.png",       replace: "lettuce.png",    audio: "paper.mp3"},
+    // {list: 1, target_location: "L", target: "scissors.png",   cohort: "cymbals.png",    replace: "cherry.png",     audio: "scissors.mp3"},
+    // {list: 1, target_location: "R", target: "nose.png",       cohort: "notebook.png",   replace: "pail.png",       audio: "nose.mp3"},
+    // {list: 1, target_location: "L", target: "rope.png",       cohort: "robe.png",       replace: "leaf.png",       audio: "rope.mp3"},
+    // {list: 1, target_location: "R", target: "brick.png",      cohort: "bridge.png",     replace: "pencil.png",     audio: "brick.mp3"},
+    // {list: 1, target_location: "L", target: "penguin.png",    cohort: "pencil.png",     replace: "bridge.png",     audio: "penguin.mp3"},
 
     // // ── List 2 ─────────────────────────────────────────
-    {list: 2, target_location: "R", target: "pumpkin.png",    cohort: "puzzle.png",     replace: "table.png",      audio: "pumpkin.wav"},
-    {list: 2, target_location: "L", target: "mouse.png",      cohort: "mouth.png",      replace: "backpack.png",   audio: "mouse.wav"},
-    // {list: 2, target_location: "R", target: "doctor.png",     cohort: "doll.png",       replace: "pea.png",        audio: "doctor.wav"},
-    // {list: 2, target_location: "L", target: "battery.png",    cohort: "backpack.png",   replace: "puppet.png",     audio: "battery.wav"},
-    // {list: 2, target_location: "R", target: "street.png",     cohort: "stream.png",     replace: "toad.png",       audio: "street.wav"},
-    // {list: 2, target_location: "L", target: "children.png",   cohort: "chicken.png",    replace: "doll.png",       audio: "children.wav"},
-    // {list: 2, target_location: "R", target: "toast.png",      cohort: "toad.png",       replace: "skunk.png",      audio: "toast.wav"},
-    // {list: 2, target_location: "L", target: "chalk.png",      cohort: "chocolate.png",  replace: "telephone2.png", audio: "chalk.wav"},
-    // {list: 2, target_location: "R", target: "baby.png",       cohort: "bacon.png",      replace: "planet.png",     audio: "baby.wav"},
-    // {list: 2, target_location: "L", target: "hammer.png",     cohort: "hammock.png",    replace: "bacon.png",      audio: "hammer.wav"},
-    // {list: 2, target_location: "R", target: "telescope.png",  cohort: "telephone2.png", replace: "spider.png",     audio: "telescope.wav"},
-    // {list: 2, target_location: "L", target: "eye.png",        cohort: "ice.png",        replace: "chocolate.png",  audio: "eye.wav"},
-    // {list: 2, target_location: "R", target: "peel.png",       cohort: "pea.png",        replace: "hammock.png",    audio: "peel.wav"},
-    // {list: 2, target_location: "L", target: "puddle.png",     cohort: "puppet.png",     replace: "ice.png",        audio: "puddle.wav"},
-    // {list: 2, target_location: "R", target: "tape.png",       cohort: "table.png",      replace: "puzzle.png",     audio: "tape.wav"},
-    // {list: 2, target_location: "L", target: "skirt.png",      cohort: "skunk.png",      replace: "chicken.png",    audio: "skirt.wav"},
-    // {list: 2, target_location: "R", target: "spoon.png",      cohort: "spider.png",     replace: "mouth.png",      audio: "spoon.wav"},
-    // {list: 2, target_location: "L", target: "plate.png",      cohort: "planet.png",     replace: "stream.png",     audio: "plate.wav"}
+    // {list: 2, target_location: "R", target: "pumpkin.png",    cohort: "puzzle.png",     replace: "table.png",      audio: "pumpkin.mp3"},
+    // {list: 2, target_location: "L", target: "mouse.png",      cohort: "mouth.png",      replace: "backpack.png",   audio: "mouse.mp3"},
+    // {list: 2, target_location: "R", target: "doctor.png",     cohort: "doll.png",       replace: "pea.png",        audio: "doctor.mp3"},
+    // {list: 2, target_location: "L", target: "battery.png",    cohort: "backpack.png",   replace: "puppet.png",     audio: "battery.mp3"},
+    // {list: 2, target_location: "R", target: "street.png",     cohort: "stream.png",     replace: "toad.png",       audio: "street.mp3"},
+    // {list: 2, target_location: "L", target: "children.png",   cohort: "chicken.png",    replace: "doll.png",       audio: "children.mp3"},
+    // {list: 2, target_location: "R", target: "toast.png",      cohort: "toad.png",       replace: "skunk.png",      audio: "toast.mp3"},
+    // {list: 2, target_location: "L", target: "chalk.png",      cohort: "chocolate.png",  replace: "telephone2.png", audio: "chalk.mp3"},
+    // {list: 2, target_location: "R", target: "baby.png",       cohort: "bacon.png",      replace: "planet.png",     audio: "baby.mp3"},
+    // {list: 2, target_location: "L", target: "hammer.png",     cohort: "hammock.png",    replace: "bacon.png",      audio: "hammer.mp3"},
+    // {list: 2, target_location: "R", target: "telescope.png",  cohort: "telephone2.png", replace: "spider.png",     audio: "telescope.mp3"},
+    // {list: 2, target_location: "L", target: "eye.png",        cohort: "ice.png",        replace: "chocolate.png",  audio: "eye.mp3"},
+    // {list: 2, target_location: "R", target: "peel.png",       cohort: "pea.png",        replace: "hammock.png",    audio: "peel.mp3"},
+    // {list: 2, target_location: "L", target: "puddle.png",     cohort: "puppet.png",     replace: "ice.png",        audio: "puddle.mp3"},
+    // {list: 2, target_location: "R", target: "tape.png",       cohort: "table.png",      replace: "puzzle.png",     audio: "tape.mp3"},
+    // {list: 2, target_location: "L", target: "skirt.png",      cohort: "skunk.png",      replace: "chicken.png",    audio: "skirt.mp3"},
+    // {list: 2, target_location: "R", target: "spoon.png",      cohort: "spider.png",     replace: "mouth.png",      audio: "spoon.mp3"},
+    // {list: 2, target_location: "L", target: "plate.png",      cohort: "planet.png",     replace: "stream.png",     audio: "plate.mp3"}
 ];
 
 // Welcome page
@@ -117,14 +117,6 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
         }
     };
     
-    // const start_button = {
-    //     type: jsPsychHtmlButtonResponse,
-    //     stimulus: `<p style="color:#666; margin-bottom: 120px;">Click the button below when you are ready.</p>`,
-    //     choices: ['Start'],
-    //     button_html: function(choice) {
-    //         return `<button class="jspsych-btn start-btn">${choice}</button>`;
-    //     }
-    // };
 
     // ── Step 2: Main trial – images appear, audio plays after 500 ms ──────────
     const trial = {
@@ -151,7 +143,7 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
         on_start: function(trial_data) {
             // Play audio 500 ms after image onset (per Spivey et al.)
             setTimeout(function() {
-                let audio = new Audio('media/audio.mp3');
+                let audio = new Audio('media/' + stimulus.audio);
                 audio.play();
             }, audio_delay);
         },
@@ -211,7 +203,7 @@ experimental_stimuli.forEach((stim, index) => {
     const trials = createVWPTrial(stim, condition, false);
     timeline.push(...trials);
 
-    if ((index + 1) % 10 === 0 && index < experimental_stimuli.length - 1) {
+    if ((index + 1) % 15 === 0 && index < experimental_stimuli.length - 1) {
         timeline.push({
             type: jsPsychHtmlKeyboardResponse,
             stimulus: `
