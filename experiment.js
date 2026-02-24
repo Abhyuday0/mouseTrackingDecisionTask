@@ -14,6 +14,8 @@ let timeline = [];
 // const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
 const audio_delay = 500;       // ms after image onset before audio plays (per Spivey et al.)
 
+
+
 // Parse CSV data into trial structure
 
 
@@ -64,6 +66,17 @@ const stimuli = [
     // {list: 2, target_location: "R", target: "spoon.png",      cohort: "spider.png",     replace: "mouth.png",      audio: "spoon.mp3"},
     // {list: 2, target_location: "L", target: "plate.png",      cohort: "planet.png",     replace: "stream.png",     audio: "plate.mp3"}
 ];
+
+// Preload all images and audio files
+const all_images = stimuli.map(s => [s.target, s.cohort, s.replace]).flat().filter(Boolean).map(f => 'media/' + f);
+const all_audio = stimuli.map(s => 'media/' + s.audio);
+
+let preload = {
+    type: jsPsychPreload,
+    images: all_images,
+    audio: all_audio
+};
+timeline.push(preload);
 
 // Welcome page
 let welcome_page = {
