@@ -10,6 +10,9 @@ let jsPsych = initJsPsych({
 
 let timeline = [];
 
+// ── Debug mode ────────────────────────────────────────────────────────────────
+const DEBUG = true;  // set to false for real runs
+
 // Experiment parameters
 // const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
 const audio_delay = 500;       // ms after image onset before audio plays (per Spivey et al.)
@@ -17,6 +20,8 @@ const audio_delay = 500;       // ms after image onset before audio plays (per S
 
 
 // Parse CSV data into trial structure
+
+
 const stimuli = [
     // ── List 0 (Practice List)─────────────────────────
     {list: 0, target: "acorn.png",     cohort: "dragon.png",      replace: "",               audio: "acorn.mp3"},
@@ -127,7 +132,10 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
         stimulus: is_practice ? `<p style="color:#666; position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);">Click the button below when you are ready.</p>` : '',        choices: ['⬆'],
         button_html: function(choice) {
             return `<button class="jspsych-btn start-btn" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">${choice}</button>`;
-        }
+        },
+        extensions: [
+            { type: jsPsychExtensionMouseTracking, params: { events: ['mousemove', 'mousedown'] } }
+        ]
     };
     
 
@@ -135,7 +143,7 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
     const trial = {
         type: jsPsychHtmlKeyboardResponse,
         extensions: [
-            { type: jsPsychExtensionMouseTracking, params: { targets: ['#img-left', '#img-right'] } }
+            { type: jsPsychExtensionMouseTracking, params: { events: ['mousemove', 'mousedown'] } }
         ],
         stimulus: function() {
             return `
@@ -343,7 +351,7 @@ let qTrial6 = {
 };
 
 const questionnaire = [qTrial, qTrial2, qTrial3, qTrial4, qTrial5, qTrial6];
-timeline.push(...questionnaire);
+if (!DEBUG) timeline.push(...questionnaire);
 
 // ── Debrief ────────────────────────────────────────────────────────────────────
 let debrief = {
