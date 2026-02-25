@@ -17,7 +17,8 @@ const DEBUG = false;  // set to false for real runs
 // const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
 const audio_delay = 500;       // ms after image onset before audio plays (per Spivey et al.)
 
-
+const participant_id = 'P_' + Date.now();
+jsPsych.data.addProperties({ participant_id: participant_id });
 
 // Parse CSV data into trial structure
 
@@ -87,6 +88,7 @@ let welcome_page = {
     stimulus: `
         <h1>Welcome to the Experiment</h1>
         <p>You will see a series of pictures displayed on the screen.</p>
+        <p>Please wear headphones for this experiment.</p>
         <p>You will then hear an audio instruction.</p>
         <p>Click on the picture you're instructed to click on.</p>
         <p><i>Press SPACE to continue</i></p>
@@ -286,7 +288,7 @@ let qTrial3 = {
     type: jsPsychSurveyMultiChoice,
     questions: [
         {
-            prompt: 'Did you notice that some pairs of objects had names that sounded similar in the beginning?',
+            prompt: 'Did you notice that some pairs of objects had names that started with a similar sound?',
             name: 'NoticedCohorts',
             options: ["Yes", "No"],
             required: true
