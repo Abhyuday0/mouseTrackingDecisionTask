@@ -21,10 +21,10 @@ const audio_delay = 500;       // ms after image onset before audio plays (per S
 
 const stimuli = [
     // ── List 0 (Practice List)─────────────────────────
-    {list: 0, target_location: "R", target: "ball.png",     cohort: "bell.png",      replace: "",               audio: "ball.mp3"},
-    {list: 0, target_location: "L", target: "pizza.png",    cohort: "frog.png",      replace: "",               audio: "pizza.mp3"},
-    // {list: 0, target_location: "R", target: "jar.png",      cohort: "pizza.png",     replace: "",               audio: "jar.mp3"},
-    // {list: 0, target_location: "L", target: "bell.png",     cohort: "ball.png",      replace: "",               audio: "bell.mp3"},
+    {list: 0, target_location: "R", target: "acorn.png",     cohort: "dragon.png",      replace: "",               audio: "acorn.mp3"},
+    {list: 0, target_location: "L", target: "boomerang.png",    cohort: "parachute.png",      replace: "",               audio: "boomerang.mp3"},
+    // {list: 0, target_location: "R", target: "giraffe.png",      cohort: "doll.png",     replace: "",               audio: "giraffe.mp3"},
+    // {list: 0, target_location: "L", target: "ice.png",     cohort: "teacher.png",      replace: "",               audio: "ice.mp3"},
 
     // ── List 1 ─────────────────────────────────────────
     {list: 1, target_location: "R", target: "bed.png",        cohort: "belt.png",       replace: "cymbals.png",    audio: "bed.mp3"},
@@ -242,6 +242,107 @@ experimental_trial_pairs.forEach(({ stim, condition }, index) => {
         });
     }
 });
+
+// ── Post-experiment survey ─────────────────────────────────────────────────────
+const instructions_endofstudy = {
+    type: jsPsychInstructions,
+    pages: [
+        'Great work! You have finished the study. <br><br> There are just a few questions for you, and then the submission will be complete. <br><br> Click Next to move on.'
+    ],
+    show_clickable_nav: true
+};
+timeline.push(instructions_endofstudy);
+
+let qTrial = {
+    type: jsPsychSurveyText,
+    questions: [
+        {
+            prompt: 'What do you think the experiment was about?',
+            name: 'ExperimentPurpose'
+        }
+    ]
+};
+
+let qTrial2 = {
+    type: jsPsychSurveyText,
+    questions: [
+        {
+            prompt: 'How easy/hard did you find the task in this experiment, and what made it easier or harder?',
+            name: 'Difficulty'
+        }
+    ]
+};
+
+let qTrial3 = {
+    type: jsPsychSurveyMultiChoice,
+    questions: [
+        {
+            prompt: 'Did you notice that some pairs of objects had names that sounded similar in the beginning?',
+            name: 'NoticedCohorts',
+            options: ["Yes", "No"],
+            required: true
+        }
+    ]
+};
+
+let qTrial4 = {
+    type: jsPsychSurveyText,
+    questions: [
+        {
+            prompt: 'Did you feel that finding the object was more difficult when the names began similarly? <br> Please explain briefly.',
+            name: 'DifficultyCohorts'
+        }
+    ]
+};
+
+let qTrial5 = {
+    type: jsPsychSurveyText,
+    questions: [
+        {
+            prompt: 'Is there anything else you noticed or found interesting while doing the task? Anything not work correctly?',
+            name: 'Misc'
+        }
+    ]
+};
+
+let qTrial6 = {
+    type: jsPsychSurveyLikert,
+    questions: [
+        {
+            prompt: 'I think about problems in my mind in the form of a conversation with myself.',
+            name: 'InnerSpeech1',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'If I am walking somewhere by myself, I often have a silent conversation with myself.',
+            name: 'InnerSpeech2',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'If I am walking somewhere by myself, I frequently think of conversations that I\'ve recently had.',
+            name: 'InnerSpeech3',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'My inner speech helps my imagination.',
+            name: 'InnerSpeech4',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'I tend to think things through verbally when I am relaxing.',
+            name: 'InnerSpeech5',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        }
+    ]
+};
+
+const questionnaire = [qTrial, qTrial2, qTrial3, qTrial4, qTrial5, qTrial6];
+timeline.push(...questionnaire);
 
 // ── Debrief ────────────────────────────────────────────────────────────────────
 let debrief = {

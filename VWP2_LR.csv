@@ -1,8 +1,8 @@
 cohort_list,target_location,target,cohort,replace_cohort,audio
-0,R,ball.png,bell.png,,ball.mp3
-0,L,pizza.png,frog.png,,pizza.mp3
-0,R,jar.png,pizza.png,,jar.mp3
-0,L,bell.png,ball.png,,bell.mp3
+0,R,acorn.png,dragon.png,,acorn.mp3
+0,L,boomerang.png,parachute.png,,boomerang.mp3
+0,R,giraffe.png,doll.png,,giraffe.mp3
+0,L,ice.png,teacher.png,,ice.mp3
 1,R,bed.png,belt.png,cymbals.png,bed.mp3
 1,L,letter.png,lettuce.png,clown.png,letter.mp3
 1,R,banana.png,balloon.png,mitten.png,banana.mp3
