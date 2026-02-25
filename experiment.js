@@ -1,7 +1,7 @@
 // Initialize jsPsych
 let jsPsych = initJsPsych({
     extensions: [
-        { type: jsPsychExtensionMouseTracking, params: { sampling_rate: 60 } },
+        { type: jsPsychExtensionMouseTracking, params: { sampling_rate: 70 } },
     ],
     on_finish: function() {
         jsPsych.data.displayData();
@@ -15,7 +15,7 @@ const DEBUG = false;  // set to false for real runs
 
 // Experiment parameters
 // const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
-const audio_delay = 500;       // ms after image onset before audio plays (per Spivey et al.)
+const audio_delay = 0;       // ms after image onset before audio plays; 500 ms delay is already a part of the audio file
 
 const participant_id = 'P_' + Date.now();
 jsPsych.data.addProperties({ participant_id: participant_id });
