@@ -26,8 +26,8 @@ const stimuli = [
     // ── List 0 (Practice List)─────────────────────────
     {list: 0, target: "acorn.png",     cohort: "dragon.png",      replace: "",               audio: "acorn.mp3"},
     {list: 0, target: "boomerang.png", cohort: "parachute.png",   replace: "",               audio: "boomerang.mp3"},
-    // {list: 0, target: "giraffe.png",   cohort: "doll.png",        replace: "",               audio: "giraffe.mp3"},
-    // {list: 0, target: "ice.png",       cohort: "teacher.png",     replace: "",               audio: "ice.mp3"},
+    {list: 0, target: "giraffe.png",   cohort: "doll.png",        replace: "",               audio: "giraffe.mp3"},
+    {list: 0, target: "ice.png",       cohort: "teacher.png",     replace: "",               audio: "ice.mp3"},
 
     // ── List 1 ─────────────────────────────────────────
     {list: 1, target: "bed.png",        cohort: "belt.png",       replace: "cymbals.png",    audio: "bed.mp3"},
