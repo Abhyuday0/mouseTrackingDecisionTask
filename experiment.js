@@ -11,7 +11,7 @@ let jsPsych = initJsPsych({
 let timeline = [];
 
 // ── Debug mode ────────────────────────────────────────────────────────────────
-const DEBUG = true;  // set to false for real runs
+const DEBUG = false;  // set to false for real runs
 
 // Experiment parameters
 // const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
