@@ -300,7 +300,7 @@ let qTrial4 = {
     type: jsPsychSurveyText,
     questions: [
         {
-            prompt: 'Did you feel that finding the object was more difficult when the names began similarly? <br> Please explain briefly.',
+            prompt: 'Did you feel that finding the object was more difficult when the names began with a similar sound? <br> Please explain briefly.',
             name: 'DifficultyCohorts'
         }
     ]
