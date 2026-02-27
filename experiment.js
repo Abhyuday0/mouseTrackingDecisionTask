@@ -104,7 +104,7 @@ let instructions = {
         <h2>Instructions</h2>
         <p>In each trial:</p>
         <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
-            <li>Click the button at the bottom of the screen to begin each trial</li>
+            <li>Click the button at the bottom of the screen</li>
             <li>Two pictures will appear on the screen</li>
             <li>Shortly after, you'll hear an instruction</li>
             <li>Move your mouse upward and click the picture that matches the instruction</li>
