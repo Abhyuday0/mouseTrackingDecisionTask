@@ -35,7 +35,8 @@ let timeline = [];
 timeline.push(consent);
 
 // ── Debug mode ────────────────────────────────────────────────────────────────
-const DEBUG = false;  // set to false for real runs
+const DEBUG_Q = true;  // Remove Questionnaire from timeline if true (for quick testing of main task)
+const DEBUG_T = true;    // If true, skips practice and instructions, and only runs a few experimental trials (for quick testing of questionnnaire and redirect)
 
 // Experiment parameters
 const audio_delay = 0;       // ms after image onset before audio plays; 500 ms delay is already a part of the audio file
@@ -94,6 +95,8 @@ const stimuli = [
     {list: 2, target: "plate.png",      cohort: "planet.png",     replace: "stream.png",     audio: "plate.mp3"}
 ];
 
+if (DEBUG_T) stimuli.splice(4, stimuli.length - 4); // keep only first 4 experimental trials (remove practice)
+
 // Preload all images and audio files
 const all_images = stimuli.map(s => [s.target, s.cohort, s.replace]).flat().filter(Boolean).map(f => 'media/' + f);
 const all_audio = stimuli.map(s => 'media/' + s.audio);
@@ -119,6 +122,7 @@ var warnBeforeLeave = {
     type: jsPsychCallFunction,
     func: add_leave_warning
 };
+timeline.push(warnBeforeLeave);
 
 
 // Welcome page
@@ -129,6 +133,7 @@ let welcome_page = {
         <p>You will see a series of pictures displayed on the screen.</p>
         <p>Please wear headphones for this experiment.</p>
         <p>Please use a mouse for this experiment.</p>
+        <p>If you have a dark mode extension on your browser, please disable it for this experiment.</p>
         <p>You will then hear an audio instruction.</p>
         <p>Click on the picture you're instructed to click on.</p>
         <p><i>Press SPACE to continue</i></p>
@@ -140,6 +145,7 @@ timeline.push(welcome_page);
 var enter_fullscreen = {
 type: jsPsychFullscreen
 }
+timeline.push(enter_fullscreen);
 
 // Instructions
 let instructions = {
@@ -439,7 +445,7 @@ let qTrial6 = {
 };
 
 const questionnaire = [qTrial, qTrial2, qTrial3, qTrial4, qTrial5, qTrial6];
-if (!DEBUG) timeline.push(...questionnaire);
+if (!DEBUG_Q) timeline.push(...questionnaire);
 
 // ── Debrief ────────────────────────────────────────────────────────────────────
 let debrief = {
