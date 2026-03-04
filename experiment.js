@@ -181,7 +181,7 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
 
     const start_button = {
         type: jsPsychHtmlButtonResponse,
-        stimulus: is_practice ? `<p style="color:#666; position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);">Click the button below when you are ready.</p>` : '',        choices: ['⬆'],
+        stimulus: is_practice ? `<p style="color:#666; position: fixed; bottom: 120px; left: 50%; transform: translateX(-50%);">Click the button below when you are ready.</p>` : '',        choices: ['&#x2B06;'],
         button_html: function(choice) {
             return `<button class="jspsych-btn start-btn" style="position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%);">${choice}</button>`;
         },
