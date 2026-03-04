@@ -32,7 +32,7 @@ jsPsych.data.addProperties({
 
 let timeline = [];
 
-// timeline.push(consentTrial);
+timeline.push(consent);
 
 // ── Debug mode ────────────────────────────────────────────────────────────────
 const DEBUG = false;  // set to false for real runs
