@@ -3,22 +3,45 @@ let jsPsych = initJsPsych({
     extensions: [
         { type: jsPsychExtensionMouseTracking, params: { sampling_rate: 70 } },
     ],
-    on_finish: function() {
-        jsPsych.data.displayData();
-    }
+    // on_finish: function() {
+    //     jsPsych.data.displayData();
+    // }
 });
 
+// Capture info from Prolific or SONA
+if (experimentSystem_params['platform'] == 'Prolific') {
+    var subject_id = jsPsych.data.getURLVariable('PROLIFIC_PID');
+    var study_id = jsPsych.data.getURLVariable('STUDY_ID');
+    var session_id = jsPsych.data.getURLVariable('SESSION_ID');
+} else {
+    var subject_id = jsPsych.data.getURLVariable('survey_code');
+    var study_id = 'NA';
+    var session_id = 'NA';
+    
+    // add survey_code (subject_id) to the urlParams for redirecting
+    experimentSystem_params['urlParams']['survey_code'] = subject_id;
+}
+
+// Add properties (data columns) to the data that is output
+jsPsych.data.addProperties({
+    subject_id: subject_id,
+    study_id: study_id,
+    session_id: session_id
+});
+
+
 let timeline = [];
+
+// timeline.push(consentTrial);
 
 // ── Debug mode ────────────────────────────────────────────────────────────────
 const DEBUG = false;  // set to false for real runs
 
 // Experiment parameters
-// const preview_duration = 2000; // Duration of preview period in ms (images appear before audio)
 const audio_delay = 0;       // ms after image onset before audio plays; 500 ms delay is already a part of the audio file
 
-const participant_id = 'P_' + Date.now();
-jsPsych.data.addProperties({ participant_id: participant_id });
+// const participant_id = 'P_' + Date.now();
+// jsPsych.data.addProperties({ participant_id: participant_id });
 
 // Parse CSV data into trial structure
 
@@ -82,6 +105,22 @@ let preload = {
 };
 timeline.push(preload);
 
+// warning before closing page (to prevent a participant from inadvertently exiting the experiment)
+function eventReturn(e) {
+    e.returnValue = `Are you sure you want to leave?`; // modern browsers don't allow this custom message, but can try
+};
+
+function add_leave_warning() {
+    window.addEventListener('beforeunload', eventReturn);
+};
+
+// will remove this function before redirecting back to Prolific/SONA
+var warnBeforeLeave = {
+    type: jsPsychCallFunction,
+    func: add_leave_warning
+};
+
+
 // Welcome page
 let welcome_page = {
     type: jsPsychHtmlKeyboardResponse,
@@ -89,6 +128,7 @@ let welcome_page = {
         <h1>Welcome to the Experiment</h1>
         <p>You will see a series of pictures displayed on the screen.</p>
         <p>Please wear headphones for this experiment.</p>
+        <p>Please use a mouse for this experiment.</p>
         <p>You will then hear an audio instruction.</p>
         <p>Click on the picture you're instructed to click on.</p>
         <p><i>Press SPACE to continue</i></p>
@@ -96,6 +136,10 @@ let welcome_page = {
     choices: [' ']
 };
 timeline.push(welcome_page);
+
+var enter_fullscreen = {
+type: jsPsychFullscreen
+}
 
 // Instructions
 let instructions = {
@@ -348,6 +392,48 @@ let qTrial6 = {
             name: 'InnerSpeech5',
             labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
             required: true
+        },
+        {
+            prompt: 'When thinking about a social problem, I often talk it through in my head.',
+            name: 'InnerSpeech6',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'I like to give myself some down time to talk through thoughts in my mind.',
+            name: 'InnerSpeech7',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'I hear words in my "mind\'s ear" when I think.',
+            name: 'InnerSpeech8',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'I rarely vocalize thoughts in my mind.',
+            name: 'InnerSpeech9',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'I often talk to myself internally while watching TV.',
+            name: 'InnerSpeech10',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'My memories often involve conversations I\'ve had.',
+            name: 'InnerSpeech11',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
+        },
+        {
+            prompt: 'When I read, I tend to hear a voice in my "mind\'s ear".',
+            name: 'InnerSpeech12',
+            labels: ["Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"],
+            required: true
         }
     ]
 };
@@ -366,6 +452,28 @@ let debrief = {
     choices: "ALL_KEYS"
 };
 timeline.push(debrief);
+
+// Prolific/SONA redirect page
+var redirect_page = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: function () {
+        // execute the save and redirect script
+        saveDataAndRedirect(experimentSystem_params, outDir);
+
+        // show the html text
+        var html = `<p>Thank you for participating!</p>
+        <p>Please do not close this page. You will soon be automatically
+        redirected to the completion page.</p>
+        <p>If you are not redirected, you can copy and paste this URL into
+        your web browser to receive participation credit.</p>
+        <p><b>` + createRedirectURL(experimentSystem_params) + `</b></p>`;
+
+        return html;
+    },
+    choices: "NO_KEYS",
+    trial_duration: 2500
+};
+timeline.push(redirect_page);
 
 // Run the experiment
 jsPsych.run(timeline);
