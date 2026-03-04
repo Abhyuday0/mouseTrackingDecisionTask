@@ -132,7 +132,7 @@ let welcome_page = {
         <h1>Welcome to the Experiment</h1>
         <p>You will see a series of pictures displayed on the screen.</p>
         <p>Please wear headphones for this experiment.</p>
-        <p>Please use a mouse for this experiment.</p>
+        <p>Please use a mouse/trackpad for this experiment. NO TOUCHSCREENS!</p>
         <p>If you have a dark mode extension on your browser, please disable it for this experiment.</p>
         <p>You will then hear an audio instruction.</p>
         <p>Click on the picture you're instructed to click on.</p>
