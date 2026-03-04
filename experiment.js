@@ -29,6 +29,10 @@ jsPsych.data.addProperties({
     session_id: session_id
 });
 
+//Block touch interactions
+document.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+}, { passive: false });
 
 let timeline = [];
 

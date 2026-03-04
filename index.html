@@ -23,15 +23,10 @@
     <link href="https://unpkg.com/jspsych@8.2.3/css/jspsych.css" rel="stylesheet" type="text/css" />
 
     <style>
-        /* ──Block touch response─────────────────────────────────────────────── */
-        /* This div covers the entire screen and prevents touch interactions */
-        .touch-blocker {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 9999; /* Ensure it's on top of all other elements */
+        /* ──block touch interactions─────────────────────────────────────────────── */
+
+        * {
+        touch-action: none;
         }
 
         /* ── General reset ───────────────────────────────────────────────── */
