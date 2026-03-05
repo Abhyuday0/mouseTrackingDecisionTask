@@ -37,7 +37,7 @@ document.addEventListener('touchmove', function(e) { e.preventDefault(); }, { pa
 
 let timeline = [];
 
-timeline.push(consent);
+// timeline.push(consent);
 
 // ── Debug mode ────────────────────────────────────────────────────────────────
 const DEBUG_Q = true;  // Remove Questionnaire from timeline if true (for quick testing of main task)
@@ -145,7 +145,7 @@ let welcome_page = {
     `,
     choices: [' ']
 };
-timeline.push(welcome_page);
+// timeline.push(welcome_page);
 
 var enter_fullscreen = {
 type: jsPsychFullscreen
@@ -169,7 +169,7 @@ let instructions = {
     `,
     choices: [' ']
 };
-timeline.push(instructions);
+// timeline.push(instructions);
 
 // Function to create a VWP trial (Spivey et al. paradigm)
 function createVWPTrial(stimulus, condition, is_practice = false) {
