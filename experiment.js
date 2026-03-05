@@ -37,17 +37,15 @@ document.addEventListener('touchmove', function(e) { e.preventDefault(); }, { pa
 
 let timeline = [];
 
-// timeline.push(consent);
+timeline.push(consent);
 
 // ── Debug mode ────────────────────────────────────────────────────────────────
-const DEBUG_Q = true;  // Remove Questionnaire from timeline if true (for quick testing of main task)
-const DEBUG_T = true;    // If true, skips practice and instructions, and only runs a few experimental trials (for quick testing of questionnnaire and redirect)
+const DEBUG_Q = false;  // Remove Questionnaire from timeline if true (for quick testing of main task)
+const DEBUG_T = false;    // If true, skips practice and instructions, and only runs a few experimental trials (for quick testing of questionnnaire and redirect)
 
 // Experiment parameters
 const audio_delay = 0;       // ms after image onset before audio plays; 500 ms delay is already a part of the audio file
 
-// const participant_id = 'P_' + Date.now();
-// jsPsych.data.addProperties({ participant_id: participant_id });
 
 // Parse CSV data into trial structure
 
@@ -145,7 +143,7 @@ let welcome_page = {
     `,
     choices: [' ']
 };
-// timeline.push(welcome_page);
+timeline.push(welcome_page);
 
 var enter_fullscreen = {
 type: jsPsychFullscreen
@@ -169,7 +167,7 @@ let instructions = {
     `,
     choices: [' ']
 };
-// timeline.push(instructions);
+timeline.push(instructions);
 
 // Function to create a VWP trial (Spivey et al. paradigm)
 function createVWPTrial(stimulus, condition, is_practice = false) {
