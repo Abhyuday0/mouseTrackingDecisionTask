@@ -30,7 +30,15 @@ jsPsych.data.addProperties({
 });
 
 //Block touch interactions
-document.addEventListener('touchstart', function(e) { e.preventDefault(); }, { passive: false });
+document.addEventListener('touchstart', function(e) {
+    document.body.innerHTML = `
+        <div style="text-align:center; margin-top:200px; font-family:Arial;">
+            <h2>Touchscreen Detected</h2>
+            <p>This experiment requires a mouse or trackpad.</p>
+            <p>Please return this study on Prolific and reopen it on a device with a mouse or trackpad.</p>
+        </div>
+    `;
+}, { passive: false });
 document.addEventListener('touchend', function(e) { e.preventDefault(); }, { passive: false });
 document.addEventListener('touchmove', function(e) { e.preventDefault(); }, { passive: false });
 
