@@ -394,6 +394,17 @@ let qTrial5 = {
 };
 
 let qTrial6 = {
+    type: jsPsychSurveyText,
+    questions: [
+        {
+            prompt: 'Did you experience any issues with the audio? (e.g., didn\'t play, cut out)',
+            name: 'AudioIssues'
+        }
+    ]
+};
+
+
+let qTrial7 = {
     type: jsPsychSurveyLikert,
     questions: [
         {
@@ -471,7 +482,7 @@ let qTrial6 = {
     ]
 };
 
-const questionnaire = [qTrial, qTrial2, qTrial3, qTrial4, qTrial5, qTrial6];
+const questionnaire = [qTrial, qTrial2, qTrial3, qTrial4, qTrial5, qTrial6, qTrial7];
 if (!DEBUG_Q) timeline.push(...questionnaire);
 
 // ── Debrief ────────────────────────────────────────────────────────────────────
