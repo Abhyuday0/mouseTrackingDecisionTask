@@ -144,8 +144,9 @@ let welcome_page = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <h1>Welcome to the Experiment!</h1>
-        <p>In this study, you will see pictures on a screen and hear spoken words. Your task is to click on the picture that matches what you hear.</p>
-        <p>Before starting, you must:</p>
+        <p style="text-align: left;">In this study, you will see pictures on a screen and hear spoken words.</p>
+        <p style="text-align: left;">Your task is to click on the picture that matches what you hear.</p>
+        <p style="text-align: left;">Before starting, you must:</p>
         <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
             <li>Wear headphones.</li>
             <li>Turn your volume up to a comfortable level.</li>
@@ -156,6 +157,7 @@ let welcome_page = {
     `,
     choices: [' ']
 };
+
 timeline.push(welcome_page);
 
 var enter_fullscreen = {
@@ -268,7 +270,7 @@ let practice_intro = {
     stimulus: `
         <h2>Practice</h2>
         <p>To give you a feel for the task, you will first complete several practice trials.</p>
-        <p>When you're ready to begin, press Spacebar.</p>
+        <p><i>When you're ready to begin, press SPACE.</i></p>
     `,
     choices: [' ']
 };
