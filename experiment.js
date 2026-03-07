@@ -143,13 +143,15 @@ timeline.push(warnBeforeLeave);
 let welcome_page = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
-        <h1>Welcome to the Experiment</h1>
-        <p>You will see a series of pictures displayed on the screen.</p>
-        <p>Please wear headphones for this experiment.</p>
-        <p>Please use a mouse/trackpad for this experiment. NO TOUCHSCREENS!</p>
-        <p>If you have a dark mode extension on your browser, please disable it for this experiment.</p>
-        <p>You will then hear an audio instruction.</p>
-        <p>Click on the picture you're instructed to click on.</p>
+        <h1>Welcome to the Experiment!</h1>
+        <p>In this study, you will see pictures on a screen and hear spoken words. Your task is to click on the picture that matches what you hear.</p>
+        <p>Before starting, you must:</p>
+        <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
+            <li>Wear headphones.</li>
+            <li>Turn your volume up to a comfortable level.</li>
+            <li>Use a mouse or trackpad. (No touchscreens!)</li>
+            <li>Disable dark mode or flux, if enabled.</li>
+        </ul>
         <p><i>Press SPACE to continue</i></p>
     `,
     choices: [' ']
@@ -157,7 +159,7 @@ let welcome_page = {
 timeline.push(welcome_page);
 
 var enter_fullscreen = {
-type: jsPsychFullscreen
+    type: jsPsychFullscreen
 }
 timeline.push(enter_fullscreen);
 
@@ -166,13 +168,10 @@ let instructions = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `
         <h2>Instructions</h2>
-        <p>In each trial:</p>
         <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
-            <li>Click the button at the bottom of the screen</li>
-            <li>Two pictures will appear on the screen</li>
-            <li>Shortly after, you'll hear an instruction</li>
-            <li>Move your mouse upward and click the picture that matches the instruction</li>
-            <li>Try to respond as quickly and accurately as possible</li>
+            <li>To begin each trial, you will click the arrow button at the bottom of the screen.</li>
+            <li>Two pictures will appear at the top of the screen (on the left and right). You will then hear the name of one of the objects.</li>
+            <li>Your job is to click the picture that is named, as quickly and accurately as you can.</li>
         </ul>
         <p><i>Press SPACE to begin the practice trials</i></p>
     `,
@@ -263,6 +262,18 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
 }
 
 // ── Practice trials (list 0) ───────────────────────────────────────────────────
+// Practice intro
+let practice_intro = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <h2>Practice</h2>
+        <p>To give you a feel for the task, you will first complete several practice trials.</p>
+        <p>When you're ready to begin, press Spacebar.</p>
+    `,
+    choices: [' ']
+};
+timeline.push(practice_intro);
+
 const practice_stimuli = stimuli.filter(s => s.list === 0);
 practice_stimuli.forEach(stim => {
     const practice_trials = createVWPTrial(stim, 'cohort', true);
