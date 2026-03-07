@@ -346,7 +346,8 @@ let qTrial = {
     questions: [
         {
             prompt: 'What do you think the experiment was about?',
-            name: 'ExperimentPurpose'
+            name: 'ExperimentPurpose',
+            required: true
         }
     ]
 };
@@ -356,7 +357,8 @@ let qTrial2 = {
     questions: [
         {
             prompt: 'How easy/hard did you find the task in this experiment, and what made it easier or harder?',
-            name: 'Difficulty'
+            name: 'Difficulty',
+            required: true
         }
     ]
 };
@@ -378,7 +380,8 @@ let qTrial4 = {
     questions: [
         {
             prompt: 'Did you feel that finding the object was more difficult when the names began with a similar sound? <br> Please explain briefly.',
-            name: 'DifficultyCohorts'
+            name: 'DifficultyCohorts',
+            required: true
         }
     ]
 };
@@ -398,7 +401,8 @@ let qTrial6 = {
     questions: [
         {
             prompt: 'Did you experience any issues with the audio? (e.g., didn\'t play, cut out)',
-            name: 'AudioIssues'
+            name: 'AudioIssues',
+            required: true
         }
     ]
 };
