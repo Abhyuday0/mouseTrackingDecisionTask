@@ -163,7 +163,18 @@ timeline.push(welcome_page);
 var enter_fullscreen = {
     type: jsPsychFullscreen
 }
+
+var record_window_size = {
+    type: jsPsychCallFunction,
+    func: function() {
+        jsPsych.data.addProperties({
+            window_width: window.innerWidth,
+            window_height: window.innerHeight,
+        });
+    }
+};
 timeline.push(enter_fullscreen);
+timeline.push(record_window_size);  // ← captures post-fullscreen dimensions
 
 // Instructions
 let instructions = {
@@ -236,14 +247,21 @@ function createVWPTrial(stimulus, condition, is_practice = false) {
             }, audio_delay);
         },
         on_load: function() {
+            // Capture image onset time for RT calculation
+            const image_onset = performance.now();
+
             // End trial when participant clicks either image
             document.querySelectorAll('.vwp-image').forEach(function(img) {
                 img.addEventListener('click', function() {
+                    const rt_from_image_onset = performance.now() - image_onset;
+                    const rt_from_audio_onset = rt_from_image_onset - audio_delay;
                     jsPsych.finishTrial({
                         clicked_image: this.id,
                         clicked_choice: this.getAttribute('data-choice'),
                         correct: (this.id === 'img-left' && actual_target_location === 'L') ||
-                                 (this.id === 'img-right' && actual_target_location === 'R')
+                                 (this.id === 'img-right' && actual_target_location === 'R'),
+                        rt: rt_from_image_onset,
+                        rt_from_audio_onset: rt_from_audio_onset
                     });
                 });
             });
